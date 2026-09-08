@@ -280,9 +280,9 @@
           <span class="emoji">🌮</span>
           <span class="name">Taco</span>
         </div>
-        <div class="food-card" onclick="selectFood(this, 'Ramen')">
-          <span class="emoji">🍜</span>
-          <span class="name">Ramen</span>
+        <div class="food-card" onclick="selectFood(this, 'Sıralı Kebap')">
+          <span class="emoji">🍢</span>
+          <span class="name">Sıralı Kebap</span>
         </div>
       </div>
       <button class="btn-pink btn-full" onclick="validateStep4()">Sonraki →</button>
@@ -290,13 +290,10 @@
 
     <!-- ADIM 5: Kapanış Mektubu -->
     <div class="step" id="step5">
-      <h2 class="title-serif" style="line-height: 1.4; margin-bottom: 16px;">
+      <h2 class="title-serif" style="line-height: 1.4; margin-bottom: 24px;">
         hayır demediğine sevindim.<br>hazır ol, seni almaya geliyorum 🚗
       </h2>
-      <p class="subtitle" style="font-style: italic; font-size: 13px; line-height: 1.6; margin-bottom: 24px;">
-        Not: Normal insanlar mesaj atar. Ben öğle arasında senin için web sitesi yaptım, mesele değil.
-      </p>
-      <div style="color: var(--primary-pink); letter-spacing: 6px; margin-bottom: 24px;">♥♥♥♥♥</div>
+      <div style="color: var(--primary-pink); letter-spacing: 6px; margin-bottom: 28px;">♥♥♥♥♥</div>
       <button class="btn-pink btn-full" onclick="finishFlow()">tamam, kabul ediyorum 💝</button>
     </div>
 
@@ -312,13 +309,11 @@
       if (next) next.classList.add('active');
     }
 
-    // Hayır Butonunun Kaçış Mantığı (Mobil dokunma ve PC mouse uyumlu)
     function evade(e) {
       if (e) e.preventDefault();
       const btn = document.getElementById('noBtn');
       const arena = document.getElementById('btnArena');
 
-      // Butonun hareket edebileceği sınırları hesapla
       const maxLeft = arena.clientWidth - btn.offsetWidth;
       const maxTop = arena.clientHeight - btn.offsetHeight;
 
@@ -329,7 +324,6 @@
       btn.style.top = randomY + 'px';
     }
 
-    // İlk açılışta Hayır butonunu yerine konumlandır
     window.addEventListener('load', () => {
       const btn = document.getElementById('noBtn');
       btn.style.right = '40px';
