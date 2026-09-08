@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>🌸</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #f7ebe8;
+      --card-bg: #fbfbf9;
+      --card-shadow: 0 20px 40px rgba(186, 150, 144, 0.18);
+      --primary-pink: #d97d88;
+      --primary-pink-hover: #cb6d79;
+      --text-dark: #3a2528;
+      --text-muted: #8b7578;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 36px;
+      padding: 40px 28px 36px;
+      width: 100%;
+      max-width: 420px;
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      transition: all 0.35s ease;
+    }
+
+    .step {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .step.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .title-serif {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      color: var(--text-dark);
+      font-weight: 700;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Görsel ve İkon Alanları */
+    .icon-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-bottom: 22px;
+    }
+    .icon-box.red { background-color: #d32f2f; }
+    .icon-box.clean { background: transparent; font-size: 44px; }
+
+    /* Butonlar */
+    .btn-pink {
+      background-color: var(--primary-pink);
+      color: #ffffff;
+      border: none;
+      border-radius: 999px;
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(217, 125, 136, 0.3);
+      transition: background-color 0.2s, transform 0.1s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-pink:active {
+      transform: scale(0.97);
+    }
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Adım 1 Kaçan Buton Alanı */
+    .arena {
+      position: relative;
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    #noBtn {
+      background-color: #9d8dbb;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      position: absolute;
+      transition: left 0.15s ease, top 0.15s ease;
+      user-select: none;
+      box-shadow: 0 4px 12px rgba(157, 141, 187, 0.25);
+    }
+
+    /* Form ve Takvim Alanı */
+    .form-group {
+      width: 100%;
+      text-align: left;
+      margin-bottom: 16px;
+    }
+    .form-label {
+      font-size: 13px;
+      color: var(--text-dark);
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .input-field {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid #ebdcd7;
+      background: #ffffff;
+      font-size: 15px;
+      color: var(--text-dark);
+      outline: none;
+    }
+    .input-field:focus {
+      border-color: var(--primary-pink);
+    }
+
+    /* Yemek Seçenekleri Grid */
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    .food-card {
+      background: #fdfaf9;
+      border: 1.5px solid #ebdcd7;
+      border-radius: 20px;
+      padding: 14px 8px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .food-card .emoji {
+      font-size: 30px;
+    }
+    .food-card .name {
+      font-size: 13px;
+      color: var(--text-dark);
+      font-weight: 500;
+    }
+    .food-card.selected {
+      border-color: var(--primary-pink);
+      background: #fff3f4;
+      box-shadow: 0 0 0 2px var(--primary-pink);
+    }
+
+    .footer-credit {
+      position: absolute;
+      bottom: 14px;
+      font-size: 10px;
+      color: #b7a4a6;
+      letter-spacing: 0.5px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- ADIM 1: Ana Soru -->
+    <div class="step active" id="step1">
+      <div class="icon-box clean">🐶</div>
+      <h2 class="title-serif">🌸 Benimle yemeğe çıkar mısın? 🌸</h2>
+      <div class="arena" id="btnArena">
+        <button class="btn-pink" onclick="goToStep(2)">EVET 💌</button>
+        <button id="noBtn" onmouseover="evade()" onclick="evade()" ontouchstart="evade(event)">hayır 🐾</button>
+      </div>
+    </div>
+
+    <!-- ADIM 2: Şaşırma Ekranı -->
+    <div class="step" id="step2">
+      <div class="icon-box red">🧽</div>
+      <h2 class="title-serif">BİR DAKİKA, GERÇEKTEN EVET Mİ DEDİN?? 😭</h2>
+      <p class="subtitle">Hayır demene o kadar hazırlıklıydım ki 🥹</p>
+      <button class="btn-pink" onclick="goToStep(3)">tamam tamam! →</button>
+    </div>
+
+    <!-- ADIM 3: Gün ve Saat Seçimi -->
+    <div class="step" id="step3">
+      <div class="icon-box clean">📅🐾</div>
+      <h2 class="title-serif">Peki... ne zaman uygunsun?</h2>
+      <div class="form-group">
+        <label class="form-label">Bir Gün Seç 🗓️</label>
+        <input type="date" id="dateInput" class="input-field">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Saat Kaç Gibi? ⏰</label>
+        <input type="time" id="timeInput" class="input-field" value="19:30">
+      </div>
+      <button class="btn-pink btn-full" style="margin-top: 10px;" onclick="validateStep3()">Devam Et 💌</button>
+    </div>
+
+    <!-- ADIM 4: Menü / Ne Yiyelim? -->
+    <div class="step" id="step4">
+      <h2 class="title-serif" style="margin-top: 10px;">Ne çekiyor canımız? 🍽️✨</h2>
+      <p class="subtitle">moduna göre seç</p>
+      <div class="food-grid">
+        <div class="food-card" onclick="selectFood(this, 'Pizza')">
+          <span class="emoji">🍕</span>
+          <span class="name">Pizza</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Sushi')">
+          <span class="emoji">🍣</span>
+          <span class="name">Sushi</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Burger')">
+          <span class="emoji">🍔</span>
+          <span class="name">Burger</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Makarna')">
+          <span class="emoji">🍝</span>
+          <span class="name">Makarna</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Taco')">
+          <span class="emoji">🌮</span>
+          <span class="name">Taco</span>
+        </div>
+        <div class="food-card" onclick="selectFood(this, 'Ramen')">
+          <span class="emoji">🍜</span>
+          <span class="name">Ramen</span>
+        </div>
+      </div>
+      <button class="btn-pink btn-full" onclick="validateStep4()">Sonraki →</button>
+    </div>
+
+    <!-- ADIM 5: Kapanış Mektubu -->
+    <div class="step" id="step5">
+      <h2 class="title-serif" style="line-height: 1.4; margin-bottom: 16px;">
+        hayır demediğine sevindim.<br>hazır ol, seni almaya geliyorum 🚗
+      </h2>
+      <p class="subtitle" style="font-style: italic; font-size: 13px; line-height: 1.6; margin-bottom: 24px;">
+        Not: Normal insanlar mesaj atar. Ben öğle arasında senin için web sitesi yaptım, mesele değil.
+      </p>
+      <div style="color: var(--primary-pink); letter-spacing: 6px; margin-bottom: 24px;">♥♥♥♥♥</div>
+      <button class="btn-pink btn-full" onclick="finishFlow()">tamam, kabul ediyorum 💝</button>
+    </div>
+
+    <div class="footer-credit">✦ özel davet ✦</div>
+  </div>
+
+  <script>
+    let selectedFoodName = '';
+
+    function goToStep(stepNum) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      const next = document.getElementById('step' + stepNum);
+      if (next) next.classList.add('active');
+    }
+
+    // Hayır Butonunun Kaçış Mantığı (Mobil dokunma ve PC mouse uyumlu)
+    function evade(e) {
+      if (e) e.preventDefault();
+      const btn = document.getElementById('noBtn');
+      const arena = document.getElementById('btnArena');
+
+      // Butonun hareket edebileceği sınırları hesapla
+      const maxLeft = arena.clientWidth - btn.offsetWidth;
+      const maxTop = arena.clientHeight - btn.offsetHeight;
+
+      const randomX = Math.floor(Math.random() * Math.max(0, maxLeft));
+      const randomY = Math.floor(Math.random() * Math.max(0, maxTop));
+
+      btn.style.left = randomX + 'px';
+      btn.style.top = randomY + 'px';
+    }
+
+    // İlk açılışta Hayır butonunu yerine konumlandır
+    window.addEventListener('load', () => {
+      const btn = document.getElementById('noBtn');
+      btn.style.right = '40px';
+      btn.style.top = '50px';
+    });
+
+    function validateStep3() {
+      const dateVal = document.getElementById('dateInput').value;
+      if (!dateVal) {
+        alert('Lütfen takvimden bir gün seç :)');
+        return;
+      }
+      goToStep(4);
+    }
+
+    function selectFood(elem, name) {
+      document.querySelectorAll('.food-card').forEach(el => el.classList.remove('selected'));
+      elem.classList.add('selected');
+      selectedFoodName = name;
+    }
+
+    function validateStep4() {
+      if (!selectedFoodName) {
+        alert('Lütfen canının ne çektiğini seç :)');
+        return;
+      }
+      goToStep(5);
+    }
+
+    function finishFlow() {
+      const date = document.getElementById('dateInput').value;
+      const time = document.getElementById('timeInput').value;
+      alert(`Harika! Anlaştık 🥳\n\nTarih: ${date}\nSaat: ${time}\nPlan: ${selectedFoodName}`);
+    }
+  </script>
+</body>
+</html>
